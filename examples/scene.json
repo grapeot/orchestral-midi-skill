@@ -1,0 +1,12 @@
+{
+  "sample_rate": 48000,
+  "seed": 42,
+  "target_lufs": -20.0,
+  "peak_ceiling_dbtp": -3.0,
+  "room": {"reflection_plane": "horizontal"},
+  "listener": {"position_m": [11.0, 12.0, 1.3], "yaw_deg": 0.0},
+  "sources": [
+    {"id": "melody", "stem": "../outputs/stems/melody.wav", "position_m": [8.0, 22.0, 1.3], "library": "Your SF2 library", "license": "Record your library license", "ambience": "Describe recorded ambience", "provenance_manifest": "../outputs/stems/manifest.json"},
+    {"id": "inner", "stem": "../outputs/stems/inner.wav", "position_m": [13.0, 23.0, 1.3], "library": "Your viola library", "license": "Record your library license", "ambience": "Describe recorded ambience", "provenance_manifest": "../outputs/stems/manifest.json"}
+  ]
+}

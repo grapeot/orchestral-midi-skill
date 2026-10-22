@@ -22,3 +22,4 @@ logs/
 *.mid
 *.midi
 .DS_Store
+*.local.json

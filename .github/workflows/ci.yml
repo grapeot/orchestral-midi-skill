@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v6
       - run: uv python install 3.12
-      - run: uv venv && uv pip install -e '.[dev]'
-      - run: uv run ruff check src
-      - name: Package smoke check
-        run: uv run python -c 'import orchestral_midi; print(orchestral_midi.__version__)'
+      - run: uv sync --frozen --extra dev
+      - run: sudo apt-get update && sudo apt-get install -y ffmpeg
+      - run: uv run ruff check src tests
+      - run: uv run pytest -q

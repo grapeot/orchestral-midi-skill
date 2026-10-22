@@ -1,0 +1,12 @@
+{
+  "sample_rate": 48000, "tail_seconds": 6.0,
+  "parts": {
+    "melody": {
+      "sustain": {"engine": "sf2", "preset": "../../orchestral-assets/your-soundfont.sf2", "library": "Your SF2 library", "license": "Record your library license", "ambience": "State whether recordings contain room ambience", "gain_db": -6.0}
+    },
+    "inner": {
+      "sustain": {"engine": "sfz", "preset": "../../orchestral-assets/your-viola-sustain.sfz", "library": "Your viola library", "license": "Record your library license", "ambience": "Describe recorded ambience", "gain_db": -6.0},
+      "spiccato": {"engine": "sfz", "preset": "../../orchestral-assets/your-viola-spiccato.sfz", "library": "Your viola library", "license": "Record your library license", "ambience": "Describe recorded ambience", "gain_db": -6.0}
+    }
+  }
+}
