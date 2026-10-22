@@ -1,18 +1,42 @@
 # orchestral-midi-skill
 
-For musicians and coding agents turning MIDI into deliberately arranged orchestral parts and controlled stereo/headphone hall renders.
-
-## Status: Scaffold Only
-
-This repository currently provides architecture and skill specifications. The Python package and `orchestral-midi` CLI (`inspect`, `score`, `synthesize`, `mix`) will be implemented on a feature branch; exact JSON schemas and CLI flags will be finalized there.
+A Python toolkit and coding-agent skill for turning musical material into explicitly authored orchestral scores (Art) and controlled stereo/binaural hall renders (Science). The `orchestral-midi` CLI is a deterministic compiler and acoustic renderer for authored score JSON, not an automatic arbitrary MIDI arranger.
 
 ## Core Principle: Art vs. Science
 
-Art and Science are decoupled and independently testable:
-- **Art (Arrangement & Score)**: Explicit human/agent score decisions in integer ticks: musical roles, instrument ranges, phrases, harmony, repetition and climax, texture thinning and voice leading, real meter changes, playable note lengths, and genuine articulations. Spiccato is a distinct bow articulation, neither a chopped sustain patch nor synonymous with staccato. Swapping GM programs, doubling parts, randomizing timing, or adding reverb is not a substitute for these decisions.
-- **Science (Synthesis & Acoustics)**: Repeatable MIDI timing, SF2 (FluidSynth) or SFZ (sfizz) dry-ish mono stems with built-in sample ambience disclosed, explicit per-part library provenance, source positions, rectangular image-source early reflections, an explicitly statistical late tail, fixed-head measured HRIR binaural rendering, level-matched A/B outputs, and auditable manifests. Generic HRTFs do not guarantee front externalization. Science accepts external mono stems independently of Art.
+- **[Art](skills/orchestral-midi/art.md)**: Explicit score authoring in integer ticks: MIDI inspection without assumed roles, phrase/tempo/meter maps, voice leading, register ranges, preserved same-pitch re-attacks, pacing across repeated themes, and explicit articulations. Lead / motion / bass is a starting reduction, not a universal law.
+- **[Science](skills/orchestral-midi/science.md)**: Repeatable SF2 (FluidSynth) and SFZ (sfizz) mono stem synthesis with per-part library and ambience disclosure, rectangular image-source early reflections, a calibrated statistical late tail, measured-SOFA binaural convolution, and linear whole-mix LUFS/true-peak matching. External mono stems can enter `mix` without `score`.
 
-## One-Root Agent Installation Protocol
+## Installation & External Binaries
+
+Requires Python >=3.11 and `uv`. External binaries are invoked as needed: `ffmpeg` for `mix`, `fluidsynth` for SF2, and `sfizz_render` for SFZ. No implicit asset downloads, network calls, or credentials are used.
+
+```bash
+uv venv
+source .venv/bin/activate
+uv pip install -e '.[dev]'
+```
+
+## CLI Usage & Example Configuration
+
+```bash
+# Compile an original authored score, then inspect its MIDI
+orchestral-midi score --score examples/score.json --output outputs/score
+orchestral-midi inspect --midi outputs/score/ensemble.mid --output outputs/inspection.json
+
+# Copy/edit the instrument example with your own licensed library paths
+cp examples/instruments.example.json examples/instruments.local.json
+orchestral-midi synthesize --bundle outputs/score --instruments examples/instruments.local.json --output outputs/stems
+
+# Edit scene provenance to match your instruments; SOFA enables direct/early/hall variants
+orchestral-midi mix --scene examples/scene.json --sofa /path/to/measured.sofa --output outputs/listening
+```
+
+Relative `preset` and `stem` paths resolve from their JSON file's parent directory. Record each library's license and built-in sample ambience. See [examples](examples/score.json) and the [technical contract](docs/rfc.md) for fields, defaults, and output manifests. Omit `--sofa` for stereo-only output.
+
+Every output target must be new. Success exits `0` with a JSON summary; handled failures exit `2` with JSON errors and may leave partial files/logs. A render is complete only after its `manifest.json` is written. Generic HRTFs and a static head do not guarantee headphone front externalization; musical quality remains a listening judgment.
+
+## One-Root Agent Installation
 
 1. Hand `https://github.com/grapeot/orchestral-midi-skill` to your coding agent (Codex, Claude Code, Cursor, or OpenCode).
 2. The installer reads the target workspace `AGENTS.md` / `CLAUDE.md` and `WORKSPACE.md`, exposing **only** the single root skill `skills/orchestral-midi/SKILL.md` in the workspace skill index or agent instructions.
@@ -20,4 +44,4 @@ Art and Science are decoupled and independently testable:
 
 ## License Boundary
 
-Code and documentation are MIT-licensed. The MIT license does not cover external assets; no third-party samples, SF2/SFZ instruments, copyrighted MIDI files, or HRTF/SOFA datasets are bundled.
+Code and documentation are MIT-licensed. This does not cover external musical assets; no SF2/SFZ libraries, copyrighted MIDI, or SOFA datasets are bundled. Supply properly licensed local assets.

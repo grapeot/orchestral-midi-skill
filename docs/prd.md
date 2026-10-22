@@ -11,6 +11,7 @@ Enable musicians and coding agents to transform musical material into explicitly
 
 ## Boundaries
 
-- Currently a scaffold; implementation lands on a feature branch.
+- Implemented: `inspect`, `score`, `synthesize`, `mix`, strict Pydantic schemas, offline tests, and one root skill routing to Art/Science guides.
 - No automatic role guessing from arbitrary MIDI.
+- The compiler does not infer harmony, generate CC envelopes, or perform lossless MIDI controller roundtripping.
 - No bundled third-party assets or invented listening/externalization claims.

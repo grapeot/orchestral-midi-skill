@@ -1,0 +1,42 @@
+{
+  "title": "Original two-part articulation study",
+  "decisions": "An original short motif: melody stays single-line and soft before a brighter repeat. The inner voice sustains first, then adds one sparse spiccato pulse layer. The 2/4 bar is intentional; no automatic channel-role inference.",
+  "ticks_per_beat": 480,
+  "end_tick": 7680,
+  "tempos": [{"tick": 0, "microseconds_per_beat": 500000}, {"tick": 4800, "microseconds_per_beat": 600000}],
+  "meters": [{"tick": 0, "numerator": 4, "denominator": 4}, {"tick": 3840, "numerator": 2, "denominator": 4}, {"tick": 4800, "numerator": 4, "denominator": 4}],
+  "parts": [
+    {
+      "id": "melody", "role": "Single-line motif with a restrained opening and brighter repeat", "program": 40,
+      "range": [60, 84], "max_polyphony": 1,
+      "notes": [
+        {"start": 0, "end": 440, "pitch": 67, "velocity": 60},
+        {"start": 480, "end": 920, "pitch": 69, "velocity": 62},
+        {"start": 960, "end": 1840, "pitch": 72, "velocity": 64},
+        {"start": 1920, "end": 2800, "pitch": 71, "velocity": 60},
+        {"start": 2880, "end": 3760, "pitch": 67, "velocity": 56},
+        {"start": 3840, "end": 4280, "pitch": 65, "velocity": 58},
+        {"start": 4320, "end": 4720, "pitch": 67, "velocity": 62},
+        {"start": 4800, "end": 5240, "pitch": 67, "velocity": 72},
+        {"start": 5280, "end": 5680, "pitch": 69, "velocity": 74},
+        {"start": 5760, "end": 6640, "pitch": 72, "velocity": 76},
+        {"start": 6720, "end": 7600, "pitch": 67, "velocity": 68}
+      ]
+    },
+    {
+      "id": "inner", "role": "One accompaniment layer: sustain then sparse real short bow", "program": 41,
+      "range": [48, 72], "max_polyphony": 1,
+      "notes": [
+        {"start": 0, "end": 1800, "pitch": 60, "velocity": 42},
+        {"start": 1920, "end": 3720, "pitch": 62, "velocity": 44},
+        {"start": 3840, "end": 4680, "pitch": 59, "velocity": 42},
+        {"start": 4800, "end": 4980, "pitch": 60, "velocity": 52, "articulation": "spiccato"},
+        {"start": 5280, "end": 5460, "pitch": 64, "velocity": 50, "articulation": "spiccato"},
+        {"start": 5760, "end": 5940, "pitch": 60, "velocity": 54, "articulation": "spiccato"},
+        {"start": 6240, "end": 6420, "pitch": 64, "velocity": 50, "articulation": "spiccato"},
+        {"start": 6720, "end": 6900, "pitch": 60, "velocity": 52, "articulation": "spiccato"},
+        {"start": 7200, "end": 7380, "pitch": 64, "velocity": 48, "articulation": "spiccato"}
+      ]
+    }
+  ]
+}
